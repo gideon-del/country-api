@@ -23,7 +23,7 @@ const Input = () => {
     </div>
     <div className='relative font-semibold text-darkBlue '  onClick={toggleFilter}>
 
-    <div className='shadow-lg rounded-md py-4 px-4'>
+    <div className='shadow-lg rounded-md py-4 px-4 bg-white'>
      <input type='text' value={filter ? filter : 'Filter by Region'} readOnly  className='focus:outline-none focus:outline-white' />
      <i className="fa-solid fa-angle-down"></i>
      

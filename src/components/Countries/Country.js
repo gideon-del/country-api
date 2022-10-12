@@ -1,48 +1,33 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classes from './Country.module.css'
-const Country = () => {
- const [country,setCountry] = useState([]);
- const [isLoading,setislLoading] = useState(false)
- useEffect(()=>{
-    
-   const fetchCountries = async () =>{
-    setislLoading(true)
-    try {
-        const res = await  fetch('https://restcountries.com/v3.1/name/united');
-        const data = await res.json();
-        if(!res.ok) throw new Error('something is wrong')
-        console.log(data);
-        setCountry(data.map(ctr=>{
-            return {
-                name:ctr.name.official,
-                population:ctr.population,
-                region:ctr.region,
-                capital: ctr.capital,
-                flag:ctr.flags.svg,
-                id:ctr.area
-            }
-        }))
-    } catch (error) {
-        console.log(error)
-    }
-    setislLoading(false)
-   }
-   fetchCountries()
- },[])
+const Country = ({country,isLoading}) => {
+let content = <section className='min-h-screen flex justify-center align-center'>
+  <span className={classes.loader}></span>
+</section>
+ if(!isLoading && country.length > 0){
+ content = country.map(ctr => {
+    return <section className='flex flex-col shadow-lg rounded-lg overflow-hidden bg-white'>
+   
+        <img src={ctr.flag} alt={ctr.name} className='w-auto h-52 self-stretch' />
+    <div className='text-veryDarkBlueL flex flex-col p-5 '>
+        <h2 className='font-extrabold mb-4 text-lg'>{ctr.name}</h2>
+        <p className='font-semibold'>Population: <span className='font-light'>
+        {ctr.population}</span></p>
+        <p className='font-semibold'>Region: <span className='font-light'>
+         {ctr.region}</span></p>
+        <p className='font-semibold'>Capital: <span className='font-light'>
+         {ctr.capital}</span></p>
+    </div>
+</section>
+})
+ }
  console.log(country)
   return (
-    <main className={classes.container}>
-    {isLoading && <span className={classes.loader}></span>}
-    {!isLoading && country.map(ctr=> {
-        return <section className={classes.card} key={ctr.id} >
-            <picture>
-                <img src={ctr.flag} alt={ctr.name}/>
-            </picture>
-        </section>
-    }) }
+    <>
+    {content}
     
-    </main>
+    </>
   )
 }
 
