@@ -7,7 +7,7 @@ let content = <section className='min-h-screen flex justify-center align-center'
 </section>
  if(!isLoading && country.length > 0){
  content = country.map(ctr => {
-    return <section className='flex flex-col shadow-lg rounded-lg overflow-hidden bg-white'>
+    return <section className='flex flex-col shadow-lg rounded-lg overflow-hidden bg-white' key={ctr.capital}>
    
         <img src={ctr.flag} alt={ctr.name} className='w-auto h-52 self-stretch' />
     <div className='text-veryDarkBlueL flex flex-col p-5 '>
@@ -22,7 +22,6 @@ let content = <section className='min-h-screen flex justify-center align-center'
 </section>
 })
  }
- console.log(country)
   return (
     <>
     {content}
