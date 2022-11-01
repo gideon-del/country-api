@@ -1,24 +1,36 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useReducer } from 'react'
 import Countries from '../../store/country-context';
-const Input = () => {
-  const [filter,setFilter] = useState({showFilter: false, filter:''});
-  const ctr = useContext(Countries)
+const filterReducer = (state,action) =>{
+  
+  if(action.type === 'FILTER'){
+    return {filter:action.val,showFilter: !state.showFilter}
+  }
+  if(action.type === 'TOGGLE'){
+    return { ...state, showFilter: !state.showFilter}
 
-  const toggleFilter = (fill) =>{
+  }
+}
+const Input = () => {
+  // const [filter,setFilter] = useState({showFilter: false, filter:''});
+  const [filter,dispatch] = useReducer(filterReducer,{filter:'',showFilter:false})
+  const ctr = useContext(Countries);
+  const regions = ['Africa','Asia','America','Oceania','Europe'];
+  const toggleFilter = () =>{
+  
+
+dispatch({type:'TOGGLE'});
+  
     
-    setFilter((prev)=> {
-      if(typeof fill !== 'string')return {...prev, showFilter : !prev.showFilter}
-     return {filter:fill, showFilter:!prev.showFilter}
-      
-    })
     
   }
+  // console.log(filter.filter)
   const changeFilter = (e) => {
-   toggleFilter(e.target.textContent)
+   dispatch({type:'FILTER',val:e.target.textContent})
     ctr.filter(e.target.textContent)
   }
   // if(filter !== '') 
   // {ctr.filterbyRegion(filter)};
+  console.log(filter)
   return (
     <form className='px-8 relative  font-nunitoSans flex flex-col md:flex-row md:justify-between space-y-5 md:space-y-0 items-start'>
     <div className='relative text-darkGray text-base self-stretch' >
