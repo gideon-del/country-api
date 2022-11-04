@@ -1,11 +1,17 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import Countries from '../../store/country-context'
+import theme from '../../toggle/Toggle';
 const Country = ({country,isLoading}) => {
+  const cotr = useContext(Countries);
+  let current = 'light';
+  if(cotr.theme){
+    current='dark'
+  }
 let content = country.map(ctr => {
-  return <section className='flex flex-col shadow-lg rounded-lg overflow-hidden bg-white' key={ctr.capital}>
+  return <section className={`${theme.general.card.main} ${theme[current].card.main}`} key={ctr.capital}>
  
       <img src={ctr.flag} alt={ctr.name} className='w-auto h-52 self-stretch' />
-  <div className='text-veryDarkBlueL flex flex-col p-5 '>
+  <div className={`${theme.general.card.text} ${theme[current].card.text}`}>
       <h2 className='font-extrabold mb-4 text-lg'>{ctr.name}</h2>
       <p className='font-semibold'>Population: <span className='font-light'>
       {ctr.population}</span></p>
@@ -16,6 +22,7 @@ let content = country.map(ctr => {
   </div>
 </section>
 })
+
 
  
   return (

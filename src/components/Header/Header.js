@@ -1,14 +1,20 @@
-import React from 'react'
-import icon from '../../Images/moon-solid.svg'
+import React, { useContext } from 'react'
+import Countries from '../../store/country-context'
+import theme from '../../toggle/Toggle';
 const Header = () => {
+  const ctr = useContext(Countries);
+  let currentTheme = 'light';
+  if(ctr.theme){
+    currentTheme = 'dark'
+  }
+  console.log(theme.general.text);
   return (
-    <header className='font-nunitoSans flex justify-between py-5 px-2 shadow-slate-500 shadow-2xl'>
-       <h1 className='font-extrabold text-veryDarkBlueL lg:text-2xl text-base'>Where in the world?</h1>
-       <div className='flex items-center'>
-        <picture>
-            <img src={icon} alt='toggle' className='w-4 h-4'/>
-        </picture>
-        <div className='font-semibold text-base'>Dark Mode</div>
+    <header className={`${theme.general.header.main} ${theme[currentTheme].header.main} transition-all duration-200`}>
+       <h1 className={`${theme.general.header.text} ${theme[currentTheme].header.text}`}>Where in the world?</h1>
+       <div className='flex items-center cursor-pointer' onClick={ctr.toggleTheme}>
+        
+       <i className={`${theme.general.header.icon} ${theme[currentTheme].header.icon}`}></i>
+        <div className={`${theme.general.header.toggle} ${theme[currentTheme].header.toggle}`}>Dark Mode</div>
        </div>
     </header>
   )

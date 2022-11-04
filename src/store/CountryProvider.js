@@ -1,11 +1,13 @@
 
 import React, {useCallback, useEffect, useState} from 'react'
 import Country from './country-context'
-
+import Theme from '../toggle/Toggle';
 const CountryProvider = (props) => {
   const [country,setCountry] = useState([]);
   const [isLoading,setIsLoading] = useState(true)
   const [filterdCountry,setFilterdCountry] = useState('');
+  const [toggle,setToggle] = useState(false);
+  // const [currentTheme,setCurrentTheme] = useState(true);
   const fetchCountry =useCallback( async (url ='https://restcountries.com/v3.1/all') => {
     setIsLoading(true)
     try {
@@ -39,8 +41,14 @@ const CountryProvider = (props) => {
   const filter =(val) => {
    setFilterdCountry(val)
   }
+  const toggleTheme = () => {
+    setToggle(prev => !prev)
+  }
+  
+
+
   return (
-    <Country.Provider value={{data:country,current:[],isLoading, filter}}>
+    <Country.Provider value={{data:country,current:[],isLoading, filter,theme:toggle,toggleTheme}}>
         {props.children}
     </Country.Provider>
   )

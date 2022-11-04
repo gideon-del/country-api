@@ -4,7 +4,9 @@ const Countries = React.createContext({
     data:[],
     current:[],
     isLoading:false,
-    filter:() =>{}
+    filter:() =>{},
+    theme:false,
+    toggleTheme:() => {},
 });
 
 export default Countries;
