@@ -7,6 +7,7 @@ const CountryProvider = (props) => {
   const [isLoading,setIsLoading] = useState(true)
   const [filterdCountry,setFilterdCountry] = useState('');
   const [toggle,setToggle] = useState(false);
+  const [countryFilter,setCountryFilter] = useState('');
   // const [currentTheme,setCurrentTheme] = useState(true);
   const fetchCountry =useCallback( async (url ='https://restcountries.com/v3.1/all') => {
     setIsLoading(true)
@@ -44,11 +45,14 @@ const CountryProvider = (props) => {
   const toggleTheme = () => {
     setToggle(prev => !prev)
   }
+  const addCountryFilter = (val) => {
+    setCountryFilter(val.toLowerCase())
+  }
   
 
 
   return (
-    <Country.Provider value={{data:country,current:[],isLoading, filter,theme:toggle,toggleTheme}}>
+    <Country.Provider value={{data:country,current:[],isLoading, filter,theme:toggle,toggleTheme, countryFilter,addCountryFilter}}>
         {props.children}
     </Country.Provider>
   )

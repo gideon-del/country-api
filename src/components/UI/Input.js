@@ -4,7 +4,7 @@ import theme from '../../toggle/Toggle';
 const filterReducer = (state,action) =>{
   
   if(action.type === 'FILTER'){
-    return {filter:action.val,showFilter: !state.showFilter}
+    return {filter:action.val,showFilter: false}
   }
   if(action.type === 'TOGGLE'){
     return { ...state, showFilter: !state.showFilter}
@@ -35,7 +35,7 @@ dispatch({type:'TOGGLE'});
     <form className='px-8 relative  font-nunitoSans flex flex-col md:flex-row md:justify-between space-y-5 md:space-y-0 items-start'>
     <div className={`relative ${ctr.theme ? 'text-white bg-veryDarkBlue' : 'text-veryDarkBlueL bg-white'} text-base self-stretch`} >
 
-  <input type='text' placeholder='Search for a country' className={`w-full shadow-lg py-3 pl-14 rounded-md focus:pl-14 focus:outline-none ${ctr.theme ? 'bg-darkBlue text-white' : 'bg-white text-veryDarkBlueL'} md:w-96`} />
+  <input type='text' placeholder='Search for a country' className={`w-full shadow-lg py-3 pl-14 rounded-md focus:pl-14 focus:outline-none ${ctr.theme ? 'bg-darkBlue text-white' : 'bg-white text-veryDarkBlueL'} md:w-96`} onChange={e=> ctr.addCountryFilter(e.target.value)}/>
   <div className='absolute left-5 top-3'>
   <i className="fa-solid fa-magnifying-glass"></i>
   </div>
@@ -43,7 +43,7 @@ dispatch({type:'TOGGLE'});
     <div className='relative font-semibold text-darkBlue'  onClick={toggleFilter}>
 
 <div className={`shadow-lg rounded-md py-4 px-4 ${ctr.theme ? 'bg-darkBlue text-white' : 'bg-white text-veryDarkBlueL'} cursor-pointer`}>
-     <input type='text' value={filter.filter ? filter.filter : 'Filter by Region'} readOnly  className={`focus:outline-none focus:outline-white ${ctr.theme ? 'bg-darkBlue text-white' : 'bg-white text-veryDarkBlueL'} cursor-pointer `} />
+     <input type='text' value={filter.filter ? filter.filter : 'Filter by Region'} readOnly  className={`focus:outline-none  ${ctr.theme ? 'bg-darkBlue text-white focus:outline-darkBlue' : 'bg-white text-veryDarkBlueLfocus:outline-white'} cursor-pointer `} />
      <i className="fa-solid fa-angle-down cursor-pointer"></i>
      
     </div>

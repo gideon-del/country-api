@@ -7,6 +7,7 @@ const Country = ({country,isLoading}) => {
   if(cotr.theme){
     current='dark'
   }
+
 let content = country.map(ctr => {
   return <section className={`${theme.general.card.main} ${theme[current].card.main}`} key={ctr.capital}>
  

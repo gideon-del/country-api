@@ -7,6 +7,8 @@ const Countries = React.createContext({
     filter:() =>{},
     theme:false,
     toggleTheme:() => {},
+    countryFilter:'',
+    addCountryFilter:() =>{}
 });
 
 export default Countries;
